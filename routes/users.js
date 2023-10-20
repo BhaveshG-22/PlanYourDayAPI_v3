@@ -13,9 +13,8 @@ router.post("/signup", async (req, res) => {
 
   if (user) {
     console.log(user);
-    return res.json({ message: "uaser already exist" });
+    return res.json({ message: "User already exist" });
   }
-  console.log("reached line 16");
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -37,13 +36,13 @@ router.post("/login", async (req, res) => {
     console.error;
   }
   if (!user) {
-    return res.json({ message: "user doesnt exist" });
+    return res.json({ message: "User doesnt exist" });
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {
-    return res.json({ message: "username or password is incorrect" });
+    return res.json({ message: "Username or Password is incorrect" });
   }
 
   const token = jwt.sign({ id: user._id, user }, "secret");
