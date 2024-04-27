@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 
 import { userRouter } from "./routes/users.js";
 import { dataRouter } from "./routes/data.js";
+import { convRouter } from "./routes/conv.js";
+
 const app = express();
 
 app.use(express.json());
@@ -13,6 +15,8 @@ dotenv.config();
 
 app.use("/auth", userRouter);
 app.use("/data", dataRouter);
+app.use("/getConverstion", convRouter);
+
 
 const mongoURI = process.env.MONGODB_URI;
 
