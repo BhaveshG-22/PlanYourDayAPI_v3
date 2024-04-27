@@ -13,10 +13,13 @@ app.use(express.json());
 app.use(cors());
 dotenv.config();
 
+app.get("/", (req, res) => {
+  res.send("Hey this is my API running 🥳");
+});
+
 app.use("/auth", userRouter);
 app.use("/data", dataRouter);
-app.use("/getConverstion", convRouter);
-
+app.use("/getConversation", convRouter);
 
 const mongoURI = process.env.MONGODB_URI;
 
