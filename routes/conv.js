@@ -4,6 +4,7 @@ import { convModel } from "../models/Conv.js";
 
 const router = express.Router();
 
+//returns all conversation/mainly for trial purspose to check db health
 router.get("/getAllConv", async (req, res) => {
   console.log("here");
   try {
@@ -16,6 +17,7 @@ router.get("/getAllConv", async (req, res) => {
   }
 });
 
+//used to get scenes by location
 router.get("/location/:location", async (req, res) => {
   const location = req.params.location;
 
@@ -24,7 +26,8 @@ router.get("/location/:location", async (req, res) => {
     scenes = scenes.map((conv) => {
       return { title: conv.title, id: conv.convID };
     });
-    console.log(scenes);
+    const titlesArray = scenes.map((scene) => scene.title);
+
     return res.json({ scenes });
   } catch (error) {
     console.error("Error decoding token:", error);
@@ -34,7 +37,7 @@ router.get("/location/:location", async (req, res) => {
   res.send(location);
 });
 
- 
+//to get conversation by ID for after present-simple and progressive page
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -48,6 +51,7 @@ router.get("/:id", async (req, res) => {
   res.send(id);
 });
 
+//to add new scene
 router.post("/addConv", async (req, res) => {
   try {
     let location = req.body.location.toLowerCase();
@@ -62,6 +66,7 @@ router.post("/addConv", async (req, res) => {
   }
 });
 
+//to delete all scene
 router.delete("/DeleteAll", async (req, res) => {
   try {
     const deleteAll = await convModel.deleteMany({});
@@ -76,6 +81,7 @@ router.delete("/DeleteAll", async (req, res) => {
   }
 });
 
+//to delete any scene
 router.delete("/Delete/:id", async (req, res) => {
   try {
     const id = req.params.id;

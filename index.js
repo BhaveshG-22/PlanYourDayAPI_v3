@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import { userRouter } from "./routes/users.js";
 import { dataRouter } from "./routes/data.js";
 import { convRouter } from "./routes/conv.js";
+import { charRouter } from "./routes/character.js";
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 app.use("/auth", userRouter);
 app.use("/data", dataRouter);
 app.use("/getConversation", convRouter);
+app.use("/getLocation", charRouter);
 
 const mongoURI = process.env.MONGODB_URI;
 
